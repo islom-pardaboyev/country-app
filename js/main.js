@@ -34,7 +34,6 @@ function countryNameAppendSelect(arr, htmlAttribute) {
     arr.forEach(item => {
         let name = document.createElement("option")
         name.textContent = item
-        console.log(name);
         htmlAttribute.append(name)
     })
 }
@@ -57,30 +56,27 @@ function renderCountires(arr, list) {
         div.className = 'w-[400px] h-fit bg-[#2c3742] relative'
         btnDiv.className = 'flex btnDiv items-center gap-3 mt-2';
         likeBtn.addEventListener('click', () => {
-            likeBtn.classList.toggle('text-red-500')
+            likeBtn.classList.toggle('text-red-500');
             if (likeBtn.classList.contains('text-red-500')) {
-                likedCounties.push(value)
-                likedCountriesLenght.innerHTML = `${likedCounties.length}`
-
+                likedCounties.push(value);
             } else {
-                likedCounties.pop()
-                likedCountriesLenght.innerHTML = `${likedCounties.length}`
-
+                likedCounties = likedCounties.filter(item => item.id !== value.id);
             }
-
-        })
+            likedCountriesLenght.innerHTML = `${likedCounties.length}`;
+            console.log(likedCounties, likedCountriesLenght);
+        });
+        
 
         basketBtn.addEventListener('click', () => {
             basketBtn.classList.toggle('active')
             if (basketBtn.classList.contains('active')) {
                 basketArray.push(value)
-                basketLenght.innerHTML = `${basketArray.length}`
 
             } else {
-                basketArray.pop()
-                basketLenght.innerHTML = `${basketArray.length}`
-
+                basketArray = basketArray.filter(item => item.id !== value.id)
             }
+            basketLenght.innerHTML = `${basketArray.length}`;
+            console.log(basketArray, basketLenght);
         })
 
         moreBtn.innerHTML = `More...`
