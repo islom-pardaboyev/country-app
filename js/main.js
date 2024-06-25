@@ -77,7 +77,10 @@ function renderCountires(arr, list) {
         likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('text-red-500');
             if (likeBtn.classList.contains('text-red-500')) {
-                likedCounties.push(value);
+                if(!likedCounties.includes(value)){
+                    likedCounties.push(value);
+                }
+                
             } else {
                 likedCounties = likedCounties.filter(item => item.id !== value.id);
             }
@@ -193,3 +196,4 @@ separateName(countries, countryNameArray);
 countryNameAppendSelect(countryNameArray, selectCounriesName);
 filterBySelectTag(selectCounriesName, countriesCotainer, filter)
 filterBySearchName(countryName, countriesCotainer)
+
