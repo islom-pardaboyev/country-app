@@ -68,5 +68,41 @@ const countries = [
         capital: "Georgetown",
         population: 786559,
         flag: "https://flagcdn.com/gy.svg"
+    },
+    {
+        id: 11,
+        name: "Uzbekistan",
+        capital: "Tashkent",
+        population: 36660000,
+        flag: "https://flagcdn.com/uz.svg"
+    },
+    {
+        id: 12,
+        name: "Egypt",
+        capital: "Cairo",
+        population: 111000000,
+        flag: "https://flagcdn.com/eg.svg"
+    },
+    {
+        id: 13,
+        name: "Palestine",
+        capital: "East Jerusalem",
+        population: 5400000,
+        flag: "https://flagcdn.com/ps.svg"
+    },
+    {
+        id: 14,
+        name: "Russia",
+        capital: "Moscow",
+        population: 146000000,
+        flag: "https://flagcdn.com/ru.svg"
+    }
+    ,
+    {
+        id: 15,
+        name: "Portugal",
+        capital: "Lisbon",
+        population: 10200000,
+        flag: "https://flagcdn.com/pt.svg"
     }
 ]

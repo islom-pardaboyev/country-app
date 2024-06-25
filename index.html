@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countries</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- stlesheet -->
-    <style type="text/tailwindcss">
-      @layer utilities {
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countries</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- stlesheet -->
+  <style type="text/tailwindcss">
+    @layer utilities {
         .content-auto {
           content-visibility: auto;
         }
@@ -28,87 +25,71 @@
         stroke: red;
       }
     </style>
-  </head>
-  <body class="bg-[#212b36]">
-    <main>
-      <!-- header -->
-      <header
-        class="bg-[#2c3742] fixed w-full top-0 left-0 z-50 text-white shadow-md"
-      >
-        <div class="container py-5 flex items-center justify-between mx-auto">
-          <a href="#" class="font-bold text-2xl">Countires</a>
+</head>
 
-          <div class="flex items-center gap-6">
-            <button
-              class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1"
-            >
-              <img src="images/heart-svgrepo-com.svg" width="25" alt="" />
-              <strong id="likedCountriesLenght">0</strong>
-            </button>
-            <button
-              class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1"
-            >
-              <img src="images/basket-svgrepo-com.svg" width="25" alt="" />
-              <strong id="basketLenght">0</strong>
-            </button>
-            <button
-              class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1"
-            >
-              <img src="images/moon-svgrepo-com.svg" width="25" alt="" />
-              <strong>Dark</strong>
-            </button>
-          </div>
+<body class="bg-[#212b36]">
+  <main id="mainContainer">
+    <!-- header -->
+    <header class="bg-[#2c3742] text-white shadow-md">
+      <div class="container py-5 flex items-center justify-between mx-auto">
+        <a href="/index.html" class="font-bold text-2xl">Countires</a>
+
+        <div class="flex items-center gap-6">
+          <button id="likeBtn" class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1">
+            <img src="images/heart-svgrepo-com.svg" width="25" alt="" />
+            <strong id="likedCountriesLenght">0</strong>
+          </button>
+          <button id="basketBtn" class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1">
+            <img src="images/basket-svgrepo-com.svg" width="25" alt="" />
+            <strong id="basketLenght">0</strong>
+          </button>
+          <button class="p-2 flex items-center border border-white rounded-full h-[55px] gap-1">
+            <img src="images/moon-svgrepo-com.svg" width="25" alt="" />
+            <strong>Dark</strong>
+          </button>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <!-- main -->
-      <main class="mt-24">
-        <section class="container mx-auto">
-          <div class="flex bg-[#212b36] py-7 items-center justify-between">
-            <div class="flex items-center p-3 gap-1 w-fit bg-[#2c3742]">
-              <img src="/images/search-svgrepo-com.svg" width="20" alt="" />
-              <input
-                class="bg-transparent w-[200px] outline-none text-white"
-                type="text"
-                placeholder="Search..."
-              />
-            </div>
-
-            <select
-              id="selectCounriesName"
-              class="text-white bg-[#2c3742] outline-none w-[200px] py-3 px-3"
-            >
-              <option value="All">All</option>
-            </select>
+    <!-- main -->
+    <main class="mt-5">
+      <section class="container mx-auto">
+        <div class="flex bg-[#212b36] py-7 items-center justify-between">
+          <div class="flex items-center p-3 gap-1 w-fit bg-[#2c3742]">
+            <img src="/images/search-svgrepo-com.svg" width="20" alt="" />
+            <input id="countryName" class="bg-transparent w-[200px] outline-none text-white" type="text" placeholder="Search..." />
           </div>
 
-          <div
-            id="countries-container"
-            class="flex justify-between gap-10 flex-wrap"
-          ></div>
-        </section>
-      </main>
+          <select id="selectCounriesName" class="text-white bg-[#2c3742] outline-none w-[200px] py-3 px-3">
+            <option value="All">All</option>
+          </select>
+        </div>
+
+        <div id="countries-container" class="flex justify-between gap-10 flex-wrap"></div>
+      </section>
     </main>
+  </main>
 
-    <!-- modal -->
-    <!-- <div class="min-w-[1000px] rounded-md min-h-[500px] bg-[#212b36] border border-white fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-      <i class="fa-solid fa-xmark absolute top-3 cursor-pointer right-3 text-[#212b36] bg-white rounded-full w-[30px] h-[30px] flex items-center justify-center text-2xl"></i>
-    </div> -->
+  <!-- modal -->
+  <div id="modalCon"
+    class="min-w-[1000px] transition-all duration-300 rounded-md flex p-7 items-center min-h-[500px] bg-[#212b36] border border-white fixed top-[-200%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+  </div>
 
-    <!-- scripts -->
-    <script src="js/countries.js"></script>
-    <script src="js/main.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: "#da373d",
-            },
+  <!-- scripts -->
+  <script src="js/countries.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: "#da373d",
           },
         },
-      };
-    </script>
-  </body>
+      },
+    };
+  </script>
+</body>
+
 </html>
