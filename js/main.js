@@ -34,7 +34,6 @@ basketBtn.addEventListener('click', () => {
         countriesCotainer.innerHTML = "";
         renderCountires(likedCounties, countriesCotainer);
     }
-    filterBySelectTag(selectCounriesName, countriesCotainer, filter)
 });
 
 // putting the names in a separate array
