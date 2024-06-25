@@ -21,14 +21,20 @@ let nameCountry = [];
 
 // liked country
 likeBtn.addEventListener('click', () => {
-    countriesCotainer.innerHTML = "";
-    renderCountires(likedCounties, countriesCotainer);
+    if (likedCounties.length !== 0) {
+        countriesCotainer.innerHTML = "";
+        renderCountires(likedCounties, countriesCotainer);
+    }
+    filterBySelectTag(selectCounriesName, countriesCotainer, filter)
 });
 
 // country on the basket
 basketBtn.addEventListener('click', () => {
-    countriesCotainer.innerHTML = "";
-    renderCountires(basketArray, countriesCotainer);
+    if(basketArray.length !== 0){
+        countriesCotainer.innerHTML = "";
+        renderCountires(likedCounties, countriesCotainer);
+    }
+    filterBySelectTag(selectCounriesName, countriesCotainer, filter)
 });
 
 // putting the names in a separate array
@@ -63,11 +69,11 @@ function renderCountires(arr, list) {
         let likeBtn = document.createElement("i");
         let basketBtn = document.createElement("i");
         let moreBtn = document.createElement("button");
-        
+
         div.className = 'w-[400px] h-fit bg-[#2c3742] relative';
         btnDiv.className = 'flex btnDiv items-center gap-3 mt-2';
         basketBtn.className = 'cursor-pointer fa-solid fa-basket-shopping';
-        
+
         // like btn
         likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('text-red-500');
@@ -79,7 +85,7 @@ function renderCountires(arr, list) {
             likedCountriesLenght.innerHTML = `${likedCounties.length}`;
             console.log(likedCounties, likedCountriesLenght);
         });
-        
+
         // basket btn
         basketBtn.addEventListener('click', () => {
             basketBtn.classList.toggle('text-cyan-400');
@@ -92,7 +98,7 @@ function renderCountires(arr, list) {
             basketLenght.innerHTML = `${basketArray.length}`;
             console.log(basketArray, basketLenght);
         });
-        
+
         // more btn
         moreBtn.addEventListener('click', () => {
             modalCon.classList.add("transition-all", "duration-300", "top-[50%]");
@@ -107,36 +113,36 @@ function renderCountires(arr, list) {
             <h1><strong>Name:</strong> ${value.name}</h1>
             <h1><strong>ID:</strong> ${value.id}</h1>
             </div>`;
-            
+
             let closeModalCountry = document.querySelector(".fa-xmark");
             console.log(closeModalCountry);
-            
+
             closeModalCountry.addEventListener('click', () => {
                 closeModal();
             });
-            
+
             document.addEventListener('keydown', handleEscKey);
         });
-        
+
         moreBtn.innerHTML = `More...`;
         moreBtn.className = 'bg-sky-600 px-2 rounded-md text-xl';
-        
+
         img.src = value.flag;
         img.className = "min-h-[300px]";
         id.className = 'absolute bg-white/50 font-bold rounded-full w-[50px] h-[50px] flex items-center justify-center text-black top-2 right-2';
-        
+
         name.innerHTML = `<span class="font-bold">Name: </span>${value.name}`;
         id.innerHTML = value.id;
         population.innerHTML = `<span class="font-bold">Population: </span>${value.population}`;
         capital.innerHTML = `<span class="font-bold">Capital: </span>${value.capital}`;
         likeBtn.className = `fa-solid text-[20px] fa-heart cursor-pointer`;
-        
+
         aboutDiv.className = "p-3";
-        
+
         aboutDiv.append(id, population, name, capital, btnDiv);
         btnDiv.append(likeBtn, basketBtn, moreBtn);
         div.append(img, aboutDiv);
-        
+
         list.append(div);
     });
 }
@@ -150,7 +156,7 @@ function closeModal() {
 }
 
 // function filter by search name
-function filterBySearchName(name, nameArr){
+function filterBySearchName(name, nameArr) {
     name.addEventListener('input', () => {
         const inputValue = name.value.toLowerCase();
         nameArr = countries.filter(item => item.name.toLowerCase().includes(inputValue))
@@ -163,7 +169,7 @@ function filterBySearchName(name, nameArr){
 function filterBySelectTag(countryName, countryContainer, filterArray) {
     countryName.addEventListener('change', () => {
         let name = countryName.value
-        
+
         if (name === "All") {
             countriesCotainer.innerHTML = "";
             renderCountires(countries, countryContainer);
