@@ -21,7 +21,9 @@ let nameCountry = [];
 
 // liked country
 likeBtn.addEventListener('click', () => {
-    if (likedCounties.length !== 0) {
+    if (likedCounties.length == 0) {
+        countriesCotainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>'
+    }else{
         countriesCotainer.innerHTML = "";
         renderCountires(likedCounties, countriesCotainer);
     }
@@ -30,9 +32,11 @@ likeBtn.addEventListener('click', () => {
 
 // country on the basket
 basketBtn.addEventListener('click', () => {
-    if(basketArray.length !== 0){
+    if (basketArray.length == 0) {
+        countriesCotainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>'
+    }else{
         countriesCotainer.innerHTML = "";
-        renderCountires(likedCounties, countriesCotainer);
+        renderCountires(basketArray, countriesCotainer);
     }
 });
 
@@ -172,7 +176,7 @@ function filterBySelectTag(countryName, countryContainer, filterArray) {
     countryName.addEventListener('change', () => {
         let name = countryName.value
 
-        if (name === "All") {
+        if (name === "All" || name === "") {
             countriesCotainer.innerHTML = "";
             renderCountires(countries, countryContainer);
         } else {
