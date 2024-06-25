@@ -165,7 +165,7 @@ function closeModal() {
 function filterBySearchName(name, nameArr) {
     name.addEventListener('input', () => {
         const inputValue = name.value.toLowerCase();
-        nameArr = countries.filter(item => item.name.toLowerCase().includes(inputValue))
+        nameArr = countries.filter(item => item.name.toLowerCase().includes(inputValue) || item.capital.toLowerCase().includes(inputValue))
         countriesCotainer.innerHTML = ""
         renderCountires(nameArr, countriesCotainer)
     })
@@ -174,7 +174,7 @@ function filterBySearchName(name, nameArr) {
 // filter by selectTag
 function filterBySelectTag(countryName, countryContainer, filterArray) {
     countryName.addEventListener('change', () => {
-        let name = countryName.value
+        let name = countryName.value.toLowerCase()
 
         if (name === "All" || name === "") {
             countriesCotainer.innerHTML = "";
