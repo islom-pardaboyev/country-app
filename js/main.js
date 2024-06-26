@@ -16,14 +16,13 @@ let basketArray = [];
 let likedCounties = [];
 let countryNameArray = [];
 let filter = [];
-let nameCountry = [];
 
 
 // liked country
 likeBtn.addEventListener('click', () => {
     if (likedCounties.length == 0) {
         countriesCotainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>'
-    }else{
+    } else {
         countriesCotainer.innerHTML = "";
         renderCountires(likedCounties, countriesCotainer);
     }
@@ -34,7 +33,7 @@ likeBtn.addEventListener('click', () => {
 basketBtn.addEventListener('click', () => {
     if (basketArray.length == 0) {
         countriesCotainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>'
-    }else{
+    } else {
         countriesCotainer.innerHTML = "";
         renderCountires(basketArray, countriesCotainer);
     }
@@ -81,10 +80,10 @@ function renderCountires(arr, list) {
         likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('text-red-500');
             if (likeBtn.classList.contains('text-red-500')) {
-                if(!likedCounties.includes(value)){
+                if (!likedCounties.includes(value)) {
                     likedCounties.push(value);
                 }
-                
+
             } else {
                 likedCounties = likedCounties.filter(item => item.id !== value.id);
             }
@@ -96,8 +95,10 @@ function renderCountires(arr, list) {
         basketBtn.addEventListener('click', () => {
             basketBtn.classList.toggle('text-cyan-400');
             if (basketBtn.classList.contains('text-cyan-400')) {
-                basketArray.push(value);
-                console.log(basketBtn);
+                if (!basketArray.includes(value)) {
+                    basketArray.push(value);
+                    console.log(basketBtn);
+                }
             } else {
                 basketArray = basketArray.filter(item => item.id !== value.id);
             }
@@ -165,7 +166,7 @@ function closeModal() {
 function filterBySearchName(name, nameArr) {
     name.addEventListener('input', () => {
         const inputValue = name.value.toLowerCase();
-        nameArr = countries.filter(item => item.name.toLowerCase().includes(inputValue) || item.capital.toLowerCase().includes(inputValue))
+        nameArr = countries.filter(item => item.name.toLowerCase().includes(inputValue))
         countriesCotainer.innerHTML = ""
         renderCountires(nameArr, countriesCotainer)
     })
@@ -174,7 +175,7 @@ function filterBySearchName(name, nameArr) {
 // filter by selectTag
 function filterBySelectTag(countryName, countryContainer, filterArray) {
     countryName.addEventListener('change', () => {
-        let name = countryName.value.toLowerCase()
+        let name = countryName.value
 
         if (name === "All" || name === "") {
             countriesCotainer.innerHTML = "";
@@ -200,4 +201,3 @@ separateName(countries, countryNameArray);
 countryNameAppendSelect(countryNameArray, selectCounriesName);
 filterBySelectTag(selectCounriesName, countriesCotainer, filter)
 filterBySearchName(countryName, countriesCotainer)
-
