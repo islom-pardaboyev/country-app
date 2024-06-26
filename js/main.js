@@ -58,6 +58,7 @@ function countryNameAppendSelect(arr, htmlAttribute) {
 
 // Render countries
 function renderCountries(arr, list) {
+    list.innerHTML = ""
     arr.forEach(value => {
         let div = document.createElement('div');
         div.className = 'w-[400px] h-fit bg-[#2c3742] hover:scale-105 transition-all duration-300 rounded-md overflow-hidden relative';
@@ -145,9 +146,8 @@ function closeModal() {
 // Function filter by search name
 function filterBySearchName(nameInput, container) {
     nameInput.addEventListener('input', () => {
-        const inputValue = nameInput.value.toLowerCase();
+        const inputValue = nameInput.value.toLowerCase().trim();
         const filteredCountries = countries.filter(item => item.name.toLowerCase().includes(inputValue));
-        container.innerHTML = "";
         renderCountries(filteredCountries, container);
     });
 }
