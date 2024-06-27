@@ -1,6 +1,6 @@
 "use strict";
 
-// Variables
+// variables
 const countriesContainer = document.querySelector("#countries-container");
 const likedCountriesLength = document.querySelector('#likedCountriesLenght');
 const basketLength = document.querySelector('#basketLenght');
@@ -11,13 +11,13 @@ const likeBtn = document.querySelector('#likeBtn');
 const basketBtn = document.querySelector('#basketBtn');
 const countryNameInput = document.querySelector("#countryName");
 
-// Empty arrays
+// empty arrays
 let basketArray = [];
 let likedCountries = [];
 let countryNameArray = [];
 let filter = [];
 
-// Liked country
+// liked country
 likeBtn.addEventListener('click', () => {
     if (likedCountries.length === 0) {
         countriesContainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>';
@@ -28,7 +28,7 @@ likeBtn.addEventListener('click', () => {
     filterBySelectTag(selectCountriesName, countriesContainer, filter);
 });
 
-// Country in the basket
+// country in the basket
 basketBtn.addEventListener('click', () => {
     if (basketArray.length === 0) {
         countriesContainer.innerHTML = '<h1 class="flex min-w-screen min-h-screen items-center mx-auto font-bold text-3xl text-[#686D76]">Not Selected</h1>';
@@ -36,9 +36,10 @@ basketBtn.addEventListener('click', () => {
         countriesContainer.innerHTML = "";
         renderCountries(basketArray, countriesContainer);
     }
+    filterBySelectTag(selectCountriesName, countriesContainer, filter);
 });
 
-// Putting the names in a separate array
+// putting the names in a separate array
 function separateName(arr, nameArr) {
     arr.forEach(item => {
         if (!nameArr.includes(item.name)) {
@@ -47,16 +48,17 @@ function separateName(arr, nameArr) {
     });
 }
 
-// Append country's name to select tag
+// append country's name to select tag
 function countryNameAppendSelect(arr, htmlAttribute) {
     arr.forEach(item => {
         let name = document.createElement("option");
         name.textContent = item;
+        name.setAttribute("value", item)
         htmlAttribute.append(name);
     });
 }
 
-// Render countries
+// render countries
 function renderCountries(arr, list) {
     list.innerHTML = ""
     arr.forEach(value => {
@@ -135,7 +137,7 @@ function renderCountries(arr, list) {
 }
 
 
-// Close modal function
+// close modal function
 function closeModal() {
     modalContainer.classList.remove("top-[50%]");
     modalContainer.classList.add("top-[-200%]");
@@ -143,16 +145,16 @@ function closeModal() {
     document.removeEventListener('keydown', handleEscKey);
 }
 
-// Function filter by search name
+// function filter by search name
 function filterBySearchName(nameInput, container) {
     nameInput.addEventListener('input', () => {
         const inputValue = nameInput.value.toLowerCase().trim();
-        const filteredCountries = countries.filter(item => item.name.toLowerCase().includes(inputValue));
+        const filteredCountries = countries.filter(item => item.name.toLowerCase().includes(inputValue) || String(item.id).toLowerCase().includes(inputValue) || item.capital.toLowerCase().includes(inputValue));
         renderCountries(filteredCountries, container);
     });
 }
 
-// Filter by select tag
+// filter by select tag
 function filterBySelectTag(selectElement, container, filterArray) {
     selectElement.addEventListener('change', () => {
         const selectedName = selectElement.value;
@@ -167,14 +169,14 @@ function filterBySelectTag(selectElement, container, filterArray) {
     });
 }
 
-// Handle Esc key press
+// handle Esc key press
 function handleEscKey(e) {
     if (e.key === "Escape") {
         closeModal();
     }
 }
 
-// Initial function calls
+// function calling
 renderCountries(countries, countriesContainer);
 separateName(countries, countryNameArray);
 countryNameAppendSelect(countryNameArray, selectCountriesName);
