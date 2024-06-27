@@ -159,11 +159,9 @@ function filterBySelectTag(selectElement, container, filterArray) {
     selectElement.addEventListener('change', () => {
         const selectedName = selectElement.value;
         if (selectedName === "All" || selectedName === "") {
-            container.innerHTML = "";
             renderCountries(countries, container);
         } else {
             filterArray = countries.filter(country => country.name === selectedName);
-            container.innerHTML = "";
             renderCountries(filterArray, container);
         }
     });
