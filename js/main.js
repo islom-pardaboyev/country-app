@@ -15,7 +15,6 @@ const countryNameInput = document.querySelector("#countryName");
 let basketArray = [];
 let likedCountries = [];
 let countryNameArray = [];
-let filter = [];
 
 // liked country
 likeBtn.addEventListener('click', () => {
@@ -44,6 +43,7 @@ function separateName(arr, nameArr) {
     arr.forEach(item => {
         if (!nameArr.includes(item.name)) {
             nameArr.push(item.name);
+            nameArr.sort()
         }
     });
 }
@@ -155,13 +155,13 @@ function filterBySearchName(nameInput, container) {
 }
 
 // filter by select tag
-function filterBySelectTag(selectElement, container, filterArray) {
+function filterBySelectTag(selectElement, container) {
     selectElement.addEventListener('change', () => {
         const selectedName = selectElement.value;
         if (selectedName === "All" || selectedName === "") {
             renderCountries(countries, container);
         } else {
-            filterArray = countries.filter(country => country.name === selectedName);
+            const filterArray = countries.filter(country => country.name === selectedName);
             renderCountries(filterArray, container);
         }
     });
@@ -178,5 +178,5 @@ function handleEscKey(e) {
 renderCountries(countries, countriesContainer);
 separateName(countries, countryNameArray);
 countryNameAppendSelect(countryNameArray, selectCountriesName);
-filterBySelectTag(selectCountriesName, countriesContainer, filter);
+filterBySelectTag(selectCountriesName, countriesContainer);
 filterBySearchName(countryNameInput, countriesContainer);
